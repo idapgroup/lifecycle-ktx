@@ -42,3 +42,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply from: '../gradle/publish.gradle'

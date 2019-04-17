@@ -12,8 +12,6 @@ import java.util.concurrent.atomic.AtomicBoolean
  */
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
-    private val wrappedObservers = HashMap<Observer<in T>, Observer<T>>()
-
     private val notify = AtomicBoolean(false)
 
     @MainThread
@@ -23,16 +21,10 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
                 observer.onChanged(it)
             }
         }
-        wrappedObservers[observer] = wrapping
         super.observe(owner, wrapping)
     }
 
-    override fun removeObserver(observer: Observer<in T>) {
-        val removed = wrappedObservers[observer]
-        removed?.let {
-            super.removeObserver(it)
-        }        
-    }
+    override fun observeForever(observer: Observer<in T>) = TODO("Not implemented")
 
     @MainThread
     override fun setValue(t: T?) {
