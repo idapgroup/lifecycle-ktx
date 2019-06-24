@@ -6,7 +6,7 @@ import com.idapgroup.lifecycle.ktx.mutableLiveDataOf
 class MainViewModel : ViewModel() {
 
     val counterLiveData = mutableLiveDataOf(0)
-    val lastPressedEvent = SingleLiveEvent<String>()
+    val lastPressedEvent = SingleLiveEvent<String?>()
 
     fun inc() {
         lastPressedEvent.value = "INC have pressed"
