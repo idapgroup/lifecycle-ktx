@@ -5,7 +5,6 @@ Several Kotlin extensions for convenient use of ViewModel and LiveData
 
 Download
 --------
-[ ![Download](https://api.bintray.com/packages/idapgroup/kotlin/lifecycle-ktx/images/download.svg?version=1.0.0) ](https://bintray.com/idapgroup/kotlin/lifecycle-ktx/1.0.0/link)
 
 Add repository to your root `build.gradle`
 
