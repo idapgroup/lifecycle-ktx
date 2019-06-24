@@ -16,7 +16,7 @@ fun <T> mutableLiveDataOf(initValue: T) = MutableLiveData<T>().apply { value = i
 /**
  * Observes given liveData and returns it Observer.
  */
-fun <T : Any, L : LiveData<T>> FragmentActivity.observe(
+fun <T : Any?, L : LiveData<T>> FragmentActivity.observe(
     liveData: L,
     observer: (T) -> Unit
 ): Observer<T> {
@@ -26,7 +26,7 @@ fun <T : Any, L : LiveData<T>> FragmentActivity.observe(
 /**
  * Observes given liveData based on [Fragment]'s viewLifecycleOwner and returns it Observer.
  */
-fun <T : Any, L : LiveData<T>> Fragment.observe(
+fun <T : Any?, L : LiveData<T>> Fragment.observe(
     liveData: L,
     observer: (T) -> Unit
 ): Observer<T> {
