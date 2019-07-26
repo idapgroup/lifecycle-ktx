@@ -11,7 +11,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -31,16 +30,21 @@ dependencies {
     def arch_version = "2.0.0"
     implementation "androidx.lifecycle:lifecycle-runtime:$arch_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.1.0-alpha04"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.1.0-rc01"
     compileOnly 'com.google.dagger:dagger:2.22.1'
+
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:4.2'
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'androidx.test:rules:1.1.1'
-    testImplementation 'org.robolectric:robolectric:4.2'
-}
-repositories {
-    mavenCentral()
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+
+
+    androidTestImplementation "org.mockito:mockito-core:3.0.0"
+    androidTestImplementation "org.mockito:mockito-android:3.0.0"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
 }
 
 apply from: '../gradle/publish.gradle'
