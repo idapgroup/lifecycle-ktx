@@ -18,7 +18,7 @@ repositories {
 
 ```groovy
 dependencies {
-  implementation 'com.idapgroup:lifecycle-ktx:1.0.1'
+  implementation 'com.idapgroup:lifecycle-ktx:1.0.2'
 }
 ```
 
