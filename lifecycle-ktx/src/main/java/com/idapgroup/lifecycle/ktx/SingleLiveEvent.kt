@@ -37,7 +37,10 @@ class SingleLiveEvent<T> : MutableLiveData<T>()  {
     }
 
     override fun removeObserver(observer: Observer<in T>) {
-        super.removeObserver(SingleLiveEventObserver(pending, observer))
+        val liveEventObserver = if (observer is SingleLiveEventObserver) observer else SingleLiveEventObserver(
+            pending, observer
+        )
+        super.removeObserver(liveEventObserver)
     }
 
     private class LambdaObserver<T>(
