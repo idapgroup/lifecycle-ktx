@@ -1,11 +1,21 @@
 package com.idapgroup.lifecycle.ktx
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.testing.launchFragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyZeroInteractions
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -48,5 +58,24 @@ class SingleLiveEventTests {
         liveData.removeObserver(firstObserver::onChanged)
         liveData.removeObserver(secondObserver::onChanged)
         assertFalse(liveData.hasObservers())
+    }
+
+    @Test fun autoRemoveObserverOnDestroy() {
+        val liveData = SingleLiveEvent<Int>()
+
+        val scenario = launchFragment { EmptyViewFragment() }
+        scenario.onFragment { fragment ->
+            fragment.observe(liveData, firstObserver::onChanged)
+        }
+
+        assertTrue(liveData.hasActiveObservers())
+
+        scenario.moveToState(Lifecycle.State.DESTROYED)
+        assertFalse(liveData.hasObservers())
+    }
+
+    class EmptyViewFragment : Fragment() {
+        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            View(requireContext())
     }
 }
