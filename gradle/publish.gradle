@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/idapgroup/lifecycle-ktx'
     gitUrl = 'https://github.com/idapgroup/lifecycle-ktx.git'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
 
     licenseName = 'BSD 3-Clause License'
