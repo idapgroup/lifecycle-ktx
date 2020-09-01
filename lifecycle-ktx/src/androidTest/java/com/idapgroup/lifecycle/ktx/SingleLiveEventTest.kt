@@ -21,13 +21,15 @@ import org.junit.Test
 
 class SingleLiveEventTests {
 
-    @get:Rule val rule = InstantTaskExecutorRule()
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
-    var firstObserver = spy<Observer<Int>> { }
-    var secondObserver = spy<Observer<Int>> { }
-    var thirdObserver = spy<Observer<Int>> { }
+    private var firstObserver = spy<Observer<Int>>()
+    private var secondObserver = spy<Observer<Int>>()
+    private var thirdObserver = spy<Observer<Int>>()
 
-    @Test fun getAndSetValue() {
+    @Test
+    fun getAndSetValue() {
         val liveData = SingleLiveEvent<Int>()
         assertNull(liveData.value)
 
@@ -35,7 +37,8 @@ class SingleLiveEventTests {
         assertEquals(290, liveData.value)
     }
 
-    @Test fun observeForever() {
+    @Test
+    fun observeForever() {
         val liveData = SingleLiveEvent<Int>()
 
         liveData.setValue(5)
@@ -48,7 +51,8 @@ class SingleLiveEventTests {
         verifyZeroInteractions(thirdObserver)
     }
 
-    @Test fun removeObserver() {
+    @Test
+    fun removeObserver() {
         val liveData = SingleLiveEvent<Int>()
 
         liveData.observeForever(firstObserver::onChanged)
@@ -60,7 +64,8 @@ class SingleLiveEventTests {
         assertFalse(liveData.hasObservers())
     }
 
-    @Test fun autoRemoveObserverOnDestroy() {
+    @Test
+    fun autoRemoveObserverOnDestroy() {
         val liveData = SingleLiveEvent<Int>()
 
         val scenario = launchFragment { EmptyViewFragment() }

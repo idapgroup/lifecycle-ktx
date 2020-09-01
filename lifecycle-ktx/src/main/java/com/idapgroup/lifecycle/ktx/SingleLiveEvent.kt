@@ -11,7 +11,7 @@ typealias OnChanged<T> = (T) -> Unit
  * MutableLiveData that emits only new updates after subscription.
  * Multiple observers registered but only one will be notified of changes.
  */
-class SingleLiveEvent<T> : MutableLiveData<T>()  {
+class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private var pending = AtomicBoolean(false)
 
@@ -37,9 +37,11 @@ class SingleLiveEvent<T> : MutableLiveData<T>()  {
     }
 
     override fun removeObserver(observer: Observer<in T>) {
-        val liveEventObserver = if (observer is SingleLiveEventObserver) observer else SingleLiveEventObserver(
-            pending, observer
-        )
+        val liveEventObserver = if (observer is SingleLiveEventObserver) {
+            observer
+        } else {
+            SingleLiveEventObserver(pending, observer)
+        }
         super.removeObserver(liveEventObserver)
     }
 
